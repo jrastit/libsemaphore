@@ -2,7 +2,7 @@ import * as snarkjs from 'snarkjs'
 import * as circomlib from 'circomlib'
 import * as crypto from 'crypto'
 import * as ethers from 'ethers'
-import { convertWitness, prove, beBuff2int } from './utils' 
+import { convertWitness, prove, beBuff2int } from './utils'
 import { storage, hashers, tree } from 'semaphore-merkle-tree'
 const eddsa = circomlib.eddsa
 const MemStorage = storage.MemStorage
@@ -211,7 +211,7 @@ const genWitness = async (
     signal: string,
     circuit: SnarkCircuit,
     identity: Identity,
-    idCommitments: SnarkBigInt[] | BigInt[] | ethers.utils.BigNumber[],
+    idCommitments: SnarkBigInt[] | BigInt[] | ethers.BigNumber[],
     treeDepth: number,
     externalNullifier: SnarkBigInt,
 ) => {
@@ -261,7 +261,7 @@ const _genWitness = async (
     signal: string,
     circuit: SnarkCircuit,
     identity: Identity,
-    idCommitments: SnarkBigInt[] | BigInt[] | ethers.utils.BigNumber[],
+    idCommitments: SnarkBigInt[] | BigInt[] | ethers.BigNumber[],
     treeDepth: number,
     externalNullifier: SnarkBigInt,
     transformSignalToHex: (x: string) => string,
@@ -288,9 +288,9 @@ const _genWitness = async (
     const { signature, msg } = genSignedMsg(
         identity.keypair.privKey,
         externalNullifier,
-        signalHash, 
+        signalHash,
     )
-   
+
     const witness = circuit.calculateWitness({
         'identity_pk[0]': identity.keypair.pubKey[0],
         'identity_pk[1]': identity.keypair.pubKey[1],
@@ -376,7 +376,7 @@ const formatForVerifierContract = (
 
     return {
         a: [ proof.pi_a[0].toString(), proof.pi_a[1].toString() ],
-        b: [ 
+        b: [
             [ proof.pi_b[0][1].toString(), proof.pi_b[0][0].toString() ],
             [ proof.pi_b[1][1].toString(), proof.pi_b[1][0].toString() ],
         ],

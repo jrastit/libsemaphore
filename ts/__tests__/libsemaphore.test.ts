@@ -71,7 +71,7 @@ describe('libsemaphore', function () {
 			'signal0',
 			circuit,
 			identity,
-			[new ethers.utils.BigNumber(idc.toString())],
+			[ethers.BigNumber.from(idc.toString())],
 			4,
 			externalNullifier,
 		)
